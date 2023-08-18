@@ -2,6 +2,6 @@ from rest_framework import serializers
 from .models import Journal_entry
 
 class JournalEntrySerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = Journal_entry
-        fields = ['plate_id','created_at']
+        fields = ['id','created_at']
