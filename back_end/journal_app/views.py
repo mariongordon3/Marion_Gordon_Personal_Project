@@ -110,6 +110,7 @@ class A_journal(APIView):
         try:
             user = User.objects.get(id=1)
             journal = Journal_entry(user_id=user)
+            # has ID?
             serialized_journal = JournalEntrySerializer(journal)
             journal.save()
             return Response(serialized_journal.data,HTTP_201_CREATED)
