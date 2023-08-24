@@ -30,7 +30,7 @@ export default function LogIn(){
         <div>
             <form className="login" onSubmit={(e)=>signUp(e)}>
                 <h5>Login</h5>
-                {status === "invalid credentials"? <><h3>Wrong credentials</h3></>:null}
+                {status? <><h3>{status}</h3></>:null}
                 <input type="email" placeholder="enter email" onChange={(event) => setUserName(event.target.value)} />
                 <input type="password" placeholder='enter password' onChange={(event) => setPassword(event.target.value)} />
                 <input type="submit" />

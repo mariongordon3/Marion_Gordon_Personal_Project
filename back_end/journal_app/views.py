@@ -6,6 +6,7 @@ from plate_app.models import Plate,Ingredient,Measurement,Nutrient
 from .serializers import JournalEntrySerializer
 from plate_app.serializers import PlateSerializer,IngredientSerializer,MeasurementSerializer,NutrientSerializer
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import HTTP_200_OK,HTTP_204_NO_CONTENT,HTTP_400_BAD_REQUEST,HTTP_404_NOT_FOUND,HTTP_201_CREATED
@@ -105,10 +106,10 @@ class A_journal(APIView):
                            serialized_measurement = MeasurementSerializer(nutrient_measurement)
                            nutrient_item['nutrients_id'] = serialized_measurement.data                    
             return Response(serialized_journal_data,status=HTTP_200_OK)
-# change method by grabbing user from cookies when using front end
+    
     def post(self,request,journal_entry_id):
         try:
-            user = User.objects.get(id=1)
+            user = User.objects.get(username=request.data['username'])
             journal = Journal_entry(user_id=user)
             # has ID?
             serialized_journal = JournalEntrySerializer(journal)
@@ -149,10 +150,11 @@ class An_ingredient(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self,request,journal_entry_id,plate_id,ingredient_id):
-        try:
+        # try:
+            print(request.data)
             journal = get_object_or_404(Journal_entry, id=journal_entry_id)
             plate = journal.plates.get(id=plate_id)
-            nutrient_list=request.data['foodNutrients']
+            nutrient_list=request.data['data']['foodNutrients']
             nutrients_to_add = []
             for nutrient in nutrient_list:
                 nutrient_measurement = Measurement(amount=nutrient['value'],unit_name=nutrient['unitName'])
@@ -161,26 +163,27 @@ class An_ingredient(APIView):
                 nutrient_description = Nutrient(name = nutrient['nutrientName'],measurement_id= nutrient_measurement,is_macro =  nutrient['nutrientName'] in nutrient_names)
                 nutrient_description.save()
                 nutrients_to_add.append(nutrient_description)
-            ingredient_measurement = Measurement(amount=request.data['servingSize'],unit_name=request.data['servingSizeUnit'])
+            ingredient_measurement = Measurement(amount=request.data['data']['servingSize'],unit_name=request.data['data']['servingSizeUnit'])
             ingredient_measurement.save()
-            ingredient = Ingredient(name=request.data['description'],plate_id=plate,measurement_id=ingredient_measurement)
+            ingredient = Ingredient(name=request.data['data']['description'],plate_id=plate,measurement_id=ingredient_measurement)
             ingredient.save()
             ingredient.nutrients_id.set(nutrients_to_add)
             serialized_ingredient = IngredientSerializer(ingredient)
             return Response(serialized_ingredient.data,status=HTTP_201_CREATED)
-        except:
-            return Response(status=HTTP_400_BAD_REQUEST)
+        # except:
+        #     return Response(status=HTTP_400_BAD_REQUEST)
         
     def put(self,request,journal_entry_id,plate_id,ingredient_id):
-        try:
+        # try:
+            print(request.data)
             journal = get_object_or_404(Journal_entry, id=journal_entry_id)
             plate = journal.plates.get(id=plate_id)
             ingredient = plate.ingredients.get(id=ingredient_id)
             ingredient.amount_consumed = request.data['amount']
             ingredient.save()
             return Response(status=HTTP_204_NO_CONTENT)
-        except:
-            return Response(status=HTTP_400_BAD_REQUEST)
+        # except:
+        #     return Response(status=HTTP_400_BAD_REQUEST)
 
     def delete(self,request,journal_entry_id,plate_id,ingredient_id):
         try:

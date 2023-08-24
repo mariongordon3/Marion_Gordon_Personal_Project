@@ -21,7 +21,7 @@ class Sign_up(APIView):
             # change when making front end
             return Response({'user':new_user.email,'token':token.key},status=HTTP_201_CREATED)
         except:
-            return Response({'detail':'invalid credentials or user exists'},status=HTTP_400_BAD_REQUEST)
+            return Response({'detail':'invalid credentials'},status=HTTP_400_BAD_REQUEST)
 
 class Log_in(APIView):
     def post(self,request):
