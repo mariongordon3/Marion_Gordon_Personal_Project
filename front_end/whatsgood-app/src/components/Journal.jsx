@@ -11,8 +11,6 @@ export function Journal(){
         }).catch((error)=>{
             console.log(error)
         })
-        // const journals = response.data
-        // setJournalList((prevJournalList) => [...prevJournalList, journals])
     }
     useEffect(()=>{
         axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=4aoaIKsciqsf7EfdYfXZOl3XgW2n8179rwc9gZRW&query=${foodName}&dataType=Branded`).then((response) =>{

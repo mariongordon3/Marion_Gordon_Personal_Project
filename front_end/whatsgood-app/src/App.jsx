@@ -22,6 +22,7 @@ export default function App() {
     if (token){
       backEndApi.defaults.headers.common['Authorization'] = `Token ${token}`
       let response = await backEndApi.get("users/info/")
+      console.log(response.data)
       setUser(response.data)
       navigate('/')
     }

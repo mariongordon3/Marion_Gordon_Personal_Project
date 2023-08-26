@@ -31,7 +31,7 @@ class Log_in(APIView):
             user = authenticate(username=username,password=password)
             if user:
                 token, created = Token.objects.get_or_create(user = user)
-                return Response({'user':token.user.username,'token':token.key}, status=HTTP_200_OK)
+                return Response({'user':token.user.username,'token':token.key, 'userid':token.user.id}, status=HTTP_200_OK)
             else:
                 return Response({'detail':'invalid credentials'},status=HTTP_400_BAD_REQUEST)
         except: 

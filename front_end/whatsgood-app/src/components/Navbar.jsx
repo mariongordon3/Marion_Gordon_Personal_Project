@@ -14,6 +14,7 @@ export default function Navbar(props){
             setUser(null)
             navigate("/login")
             delete backEndApi.defaults.headers.common['Authorization']
+            window.location.reload()
         }
     }
     return( 
