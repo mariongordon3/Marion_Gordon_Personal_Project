@@ -5,14 +5,14 @@ import Journal_entry from "./JournalEntry"
 import { backEndApi } from "./utilities"
 
 export function Journal(){
-    const {foodName,setFoodName,foodData,setFoodData,foodAmount,setFoodAmount,foodList, setFoodList, user,setUser,plateList,setPlateList,journalList,setJournalList}= useOutletContext()
+    const {foodName,setFoodName,foodData,setFoodData,foodAmount,setFoodAmount,foodList, setFoodList, user,setUser,plateList,setPlateList,journalList,setJournalList,unit,setUnit}= useOutletContext()
     const journal_maker=()=>{
-        console.log(user)
-        let response = backEndApi.post("journal/1/",{"username":user}).then((response)=>{ console.log(response)
+        let response = backEndApi.post("journal/1/",{"username":user}).then((response)=>{ console.log(response.data)
         }).catch((error)=>{
             console.log(error)
         })
-        window.location.reload()
+        // const journals = response.data
+        // setJournalList((prevJournalList) => [...prevJournalList, journals])
     }
     useEffect(()=>{
         axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=4aoaIKsciqsf7EfdYfXZOl3XgW2n8179rwc9gZRW&query=${foodName}&dataType=Branded`).then((response) =>{
@@ -23,28 +23,17 @@ export function Journal(){
         })
     },[foodName])
 
-    useEffect(()=>{
-        backEndApi.get("journal").then((response)=>{
-            const journals = response.data
-            journals.map((journal)=>{
-                setJournalList(journals)
-            })
-        }).catch((error)=>{
-            console.log(error)
-        })
-    },[])
-
     return(
         <div >
             Entry
             <div>
             <div className="journal">
-            <button onClick={journal_maker}>start journal</button>
+            <button onClick={journal_maker}>start new journal</button>
             </div>
         </div>
             <>
                 {journalList?journalList.map((journal,index)=>{
-                    return <Journal_entry key={journal.id} journal={journal} foodData={foodData} setFoodName={setFoodName} foodName={foodName} foodList={foodList} foodAmount={foodAmount} setFoodAmount={setFoodAmount}/>
+                    return <Journal_entry key={journal.id} journal={journal} foodData={foodData} setFoodName={setFoodName} foodName={foodName} setFoodList={setFoodList} foodList={foodList} foodAmount={foodAmount} setFoodAmount={setFoodAmount} user={user} unit ={unit} setUnit ={setUnit}/>
                 }):null}
             </>
         </div>

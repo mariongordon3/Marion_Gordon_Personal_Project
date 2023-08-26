@@ -9,7 +9,6 @@ background: url('https://s3-alpha-sig.figma.com/img/e063/202b/c6712661154a7b67d0
 background-blend-mode: screen; background-repeat: no-repeat; background-size: cover;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 margin-top: 0px;
-
 }
 nav > :link{
   color: #000;
@@ -82,4 +81,19 @@ height: fit-content;
 
 .login > h3{
   color: red;
+}
+
+.piechart{
+  display: flex;
+  justify-content: flex-end;
+  height:40vh;
+  width: 20vw;
+}
+.chartHeader{
+color: #000;
+font-family: Leckerli One;
+font-size: 48px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }

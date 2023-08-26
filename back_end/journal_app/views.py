@@ -53,6 +53,8 @@ class All_journals(APIView):
     
     def get(self,request):
         try:
+            # user = User.objects.get(username=request.data['username'])
+            # journal = Journal_entry(user_id=user)
             all_journals = Journal_entry.objects.all()
             serialized_journals = JournalEntrySerializer(all_journals, many=True)
             serialized_journals_data = serialized_journals.data

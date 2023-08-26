@@ -2,7 +2,7 @@ import Ingredient from "./Ingredient"
 import { backEndApi } from "./utilities"
 import { useState } from "react"
 export default function PlateEntry(props){
-    const { journal,plate,setFoodName,foodData, foodName,journalList,foodList,foodAmount,setFoodAmount} = props
+    const { journal,plate,setFoodName,foodData, foodName,journalList,setFoodList,foodList,foodAmount,setFoodAmount,unit,setUnit} = props
     const [data,setData] = useState(null)
     const onClickHandler = (event) =>{
         console.log(data)
@@ -10,27 +10,27 @@ export default function PlateEntry(props){
         }).catch((error)=>{
             console.log(error)
         })
-        // window.location.reload()
+        
     }
     const plate_maker=()=>{
         let response = backEndApi.post(`journal/${journal.id}/plate/${plate.id}/`).then((response)=>{ console.log(response)
         }).catch((error)=>{
             console.log(error)
         })
-        window.location.reload()
+     
     }
     const delete_plate = ()=>{
         let response = backEndApi.delete(`journal/${journal.id}/plate/${plate.id}/`).then((response)=>{ console.log(response)
         }).catch((error)=>{
             console.log(error)
         })
-        window.location.reload()
+     
 
     }
     return(
     <div className="ingredient">
-        <h3>{plate.id}</h3>
-        <h3>{plate.created_at}</h3>
+        <h3>Plate#{plate.id}</h3>
+        <h4>Meal Time {plate.created_at}</h4>
         <form className = 'foodQuery' onSubmit={(event) => {event.preventDefault()}}>
                 <input
                 type="text"
@@ -40,7 +40,6 @@ export default function PlateEntry(props){
                 <label>
                     <select className='selector' name="units" id="units" 
                         onChange={(e)=>{
-                            // console.log(e.target.value)
                             const foodPick = foodData?.find((x)=> e.target.value == x.fdcId)
                             setData(foodPick)
                 }}>     <option>select food</option>
@@ -53,12 +52,9 @@ export default function PlateEntry(props){
                 </button>
             </form>
         <ul>
-            {/* foodList? foodList.map((food)=>{
-                return <li>food.description<li><button>delete</button>
-            }) */}
             <>
                 {plate.ingredients.map((ingredient)=>{
-                    return <Ingredient key={ingredient.id} journal={journal} plate={plate} ingredient={ingredient} setFoodName={setFoodName} foodName={foodName} journalList={journalList} foodData={foodData} foodList={foodList} onClickHandler={onClickHandler} foodAmount={foodAmount} setFoodAmount={setFoodAmount}/>
+                    return <Ingredient key={ingredient.id} journal={journal} plate={plate} ingredient={ingredient} setFoodName={setFoodName} foodName={foodName} journalList={journalList} foodData={foodData} foodList={foodList} onClickHandler={onClickHandler} foodAmount={foodAmount}setFoodList={setFoodList}setFoodAmount={setFoodAmount} unit={unit} setUnit={setUnit}/>
                 })}
             </>
             
