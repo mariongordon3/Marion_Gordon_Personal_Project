@@ -13,10 +13,10 @@ export default function App() {
   const [plateList,setPlateList] = useState([])
   const [journalList,setJournalList] = useState([])
   const [user,setUser] = useState(null)
+  const [click,setClick] = useState(false)
   const navigate = useNavigate()
-  useEffect(()=>{
-    console.log(user)
-  },[user])
+
+  console.log(journalList)
   const whoAmI = async() =>{
     let token = localStorage.getItem("Token")
     if (token){
@@ -38,18 +38,18 @@ export default function App() {
   useEffect(()=>{
     backEndApi.get("journal").then((response)=>{
       const journals = response.data
-      setPlateList(response.data[journals.length-1].plates)
       setJournalList(journals)
+      setPlateList(response.data[journals.length-1].plates)
   }).catch((error)=>{
       console.log(error)
-  }),[journalList]
   })
+  },[click,user])
   
 
   return (
     <div className='page'>
       <Navbar setUser={setUser} user ={user}/>
-      <Outlet context={{foodName,setFoodName,foodData,setFoodData,foodList, setFoodList, user,setUser,plateList,setPlateList,journalList,setJournalList,foodAmount, setFoodAmount,unit,setUnit}}/>
+      <Outlet context={{foodName,setFoodName,foodData,setFoodData,foodList, setFoodList, user,setUser,plateList,setPlateList,journalList,setJournalList,foodAmount, setFoodAmount,unit,setUnit,setClick,click}}/>
     </div>
   )
 }

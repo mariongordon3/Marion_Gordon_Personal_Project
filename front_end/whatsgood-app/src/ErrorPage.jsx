@@ -1,7 +1,7 @@
 export default function ErrorPage(){
     return(
         <div>
-            this is the error page
+            OOOP THERE IT IS!! THIS THE ERROR PAGE. SOMETHING WENT WRONG.
         </div>
     )
 }

@@ -155,16 +155,17 @@ class An_ingredient(APIView):
 
     def post(self,request,journal_entry_id,plate_id,ingredient_id):
         # try:
-            print(request.data)
+            # print(request.data)
             journal = get_object_or_404(Journal_entry, id=journal_entry_id)
             plate = journal.plates.get(id=plate_id)
             nutrient_list=request.data['data']['foodNutrients']
             nutrients_to_add = []
             for nutrient in nutrient_list:
+                # print(nutrient)
                 nutrient_measurement = Measurement(amount=nutrient['value'],unit_name=nutrient['unitName'])
                 nutrient_measurement.save()
                 nutrient_names =["Total lipid (fat)","Protein","Carbohydrate, by difference"]
-                nutrient_description = Nutrient(name = nutrient['nutrientName'],measurement_id= nutrient_measurement,is_macro =  nutrient['nutrientName'] in nutrient_names)
+                nutrient_description = Nutrient(name = nutrient['nutrientName'],measurement_id= nutrient_measurement,percentDailyValue=nutrient.get('percentDailyValue'),is_macro =  nutrient['nutrientName'] in nutrient_names)
                 nutrient_description.save()
                 nutrients_to_add.append(nutrient_description)
             ingredient_measurement = Measurement(amount=request.data['data']['servingSize'],unit_name=request.data['data']['servingSizeUnit'])
@@ -178,7 +179,7 @@ class An_ingredient(APIView):
         #     return Response(status=HTTP_400_BAD_REQUEST)
         
     def put(self,request,journal_entry_id,plate_id,ingredient_id):
-        # try:
+        try:
             print(request.data)
             journal = get_object_or_404(Journal_entry, id=journal_entry_id)
             plate = journal.plates.get(id=plate_id)
@@ -186,8 +187,8 @@ class An_ingredient(APIView):
             ingredient.amount_consumed = request.data['amount']
             ingredient.save()
             return Response(status=HTTP_204_NO_CONTENT)
-        # except:
-        #     return Response(status=HTTP_400_BAD_REQUEST)
+        except:
+            return Response(status=HTTP_400_BAD_REQUEST)
 
     def delete(self,request,journal_entry_id,plate_id,ingredient_id):
         try:

@@ -2,11 +2,12 @@ import Ingredient from "./Ingredient"
 import { backEndApi } from "./utilities"
 import { useState } from "react"
 export default function PlateEntry(props){
-    const { journal,plate,setFoodName,foodData, foodName,journalList,setFoodList,foodList,foodAmount,setFoodAmount,unit,setUnit} = props
+    const { journal,plate,setFoodName,foodData, foodName,setJournalList,journalList,setFoodList,foodList,foodAmount,setFoodAmount,unit,setUnit,setPlateList,setClick,click } = props
     const [data,setData] = useState(null)
     const onClickHandler = (event) =>{
         console.log(data)
         let response = backEndApi.post(`journal/${journal.id}/plate/${plate.id}/ingredient/1`,{data}).then((response)=>{ console.log(response)
+        setClick(!click)
         }).catch((error)=>{
             console.log(error)
         })
@@ -14,6 +15,7 @@ export default function PlateEntry(props){
     }
     const plate_maker=()=>{
         let response = backEndApi.post(`journal/${journal.id}/plate/${plate.id}/`).then((response)=>{ console.log(response)
+        setClick(!click)
         }).catch((error)=>{
             console.log(error)
         })
@@ -21,10 +23,10 @@ export default function PlateEntry(props){
     }
     const delete_plate = ()=>{
         let response = backEndApi.delete(`journal/${journal.id}/plate/${plate.id}/`).then((response)=>{ console.log(response)
+        setClick(!click)
         }).catch((error)=>{
             console.log(error)
         })
-     
 
     }
     return(
@@ -42,7 +44,7 @@ export default function PlateEntry(props){
                         onChange={(e)=>{
                             const foodPick = foodData?.find((x)=> e.target.value == x.fdcId)
                             setData(foodPick)
-                }}>     <option>select food</option>
+                }}>     <option>select food: name,brand,serving size</option>
                         {foodData?foodData.map((food)=>{
                         return <option key={food.fdcId} value={food.fdcId}>{food.description},{food.brandName},{food.servingSize},{food.servingSizeUnit}</option>}):null}
                     </select>
@@ -54,7 +56,7 @@ export default function PlateEntry(props){
         <ul>
             <>
                 {plate.ingredients.map((ingredient)=>{
-                    return <Ingredient key={ingredient.id} journal={journal} plate={plate} ingredient={ingredient} setFoodName={setFoodName} foodName={foodName} journalList={journalList} foodData={foodData} foodList={foodList} onClickHandler={onClickHandler} foodAmount={foodAmount}setFoodList={setFoodList}setFoodAmount={setFoodAmount} unit={unit} setUnit={setUnit}/>
+                    return <Ingredient key={ingredient.id} journal={journal} plate={plate} ingredient={ingredient} setFoodName={setFoodName} foodName={foodName} journalList={journalList} foodData={foodData} foodList={foodList} onClickHandler={onClickHandler} foodAmount={foodAmount}setFoodList={setFoodList}setFoodAmount={setFoodAmount} unit={unit} setUnit={setUnit} setClick={setClick} click ={click}/>
                 })}
             </>
             
