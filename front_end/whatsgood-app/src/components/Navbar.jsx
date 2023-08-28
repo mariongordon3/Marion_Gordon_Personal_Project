@@ -23,7 +23,6 @@ export default function Navbar(props){
             <>
                 <Link to="/" >home</Link>
                 <Link to="/journal">journal</Link>
-                <Link to="/plateMaker">plate</Link>
                 <button onClick={logOut}>logout</button>
             </>
             :

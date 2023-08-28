@@ -21,7 +21,6 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 export default function HomePage(){
   const{plateList,journalList,foodAmount,user,setClick,click} = useOutletContext()
-  console.log(plateList)
   let carbCount = 0
   let proteinCount = 0
   let fatCount = 0
@@ -74,7 +73,6 @@ export default function HomePage(){
       })
     })
   })
-  console.log(microData)
   const data = [
     { name: `${carbGram} grams carbohydrates in kcal`, value: carbCount, },
     { name: `${proteinGram} grams protein in kcal`, value: proteinCount },
@@ -120,10 +118,10 @@ export default function HomePage(){
               <div className='homePage-Micro'>
                   <h2 className="chartHeaderMicro">Micros</h2>
                   <div className="dailyIntake">
-                            <div className="homePage-img">
+                            {/* <div className="homePage-img">
                               <h3>Do better</h3>
                               <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0dbb6995-1dd8-4d51-8a08-e890a1051a2f/d29g8zy-29cc8df3-2efe-419d-89ea-245213b83a4b.jpg/v1/fill/w_524,h_536,q_75,strp/super_buu_thumbs_down_by_malinakitten_d29g8zy-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTM2IiwicGF0aCI6IlwvZlwvMGRiYjY5OTUtMWRkOC00ZDUxLThhMDgtZTg5MGExMDUxYTJmXC9kMjlnOHp5LTI5Y2M4ZGYzLTJlZmUtNDE5ZC04OWVhLTI0NTIxM2I4M2E0Yi5qcGciLCJ3aWR0aCI6Ijw9NTI0In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.T_gqCPBNTpcua0r3IVoyaW2AkdCbhSwEAJoTS_1Yk9I" alt="thumbs down" />
-                            </div>
+                            </div> */}
                     <ul>
                       {Object.entries(microData).map(([key, value]) => (
                         <li key={key}>{key} : {value}%</li>

@@ -16,7 +16,6 @@ export default function App() {
   const [click,setClick] = useState(false)
   const navigate = useNavigate()
 
-  console.log(journalList)
   const whoAmI = async() =>{
     let token = localStorage.getItem("Token")
     if (token){

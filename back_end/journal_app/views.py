@@ -53,9 +53,7 @@ class All_journals(APIView):
     
     def get(self,request):
         try:
-            # print(self.request.user)
             user = User.objects.get(username=self.request.user)
-            # print(user.id)
             all_journals = Journal_entry.objects.filter(user_id_id=user.id)
             print(all_journals)
             serialized_journals = JournalEntrySerializer(all_journals, many=True)
@@ -115,7 +113,6 @@ class A_journal(APIView):
         try:
             user = User.objects.get(username=request.data['username'])
             journal = Journal_entry(user_id=user)
-            # has ID?
             serialized_journal = JournalEntrySerializer(journal)
             journal.save()
             return Response(serialized_journal.data,HTTP_201_CREATED)
@@ -154,14 +151,13 @@ class An_ingredient(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self,request,journal_entry_id,plate_id,ingredient_id):
-        # try:
-            # print(request.data)
+        try:
+            print(request.data)
             journal = get_object_or_404(Journal_entry, id=journal_entry_id)
             plate = journal.plates.get(id=plate_id)
             nutrient_list=request.data['data']['foodNutrients']
             nutrients_to_add = []
             for nutrient in nutrient_list:
-                # print(nutrient)
                 nutrient_measurement = Measurement(amount=nutrient['value'],unit_name=nutrient['unitName'])
                 nutrient_measurement.save()
                 nutrient_names =["Total lipid (fat)","Protein","Carbohydrate, by difference"]
@@ -175,8 +171,8 @@ class An_ingredient(APIView):
             ingredient.nutrients_id.set(nutrients_to_add)
             serialized_ingredient = IngredientSerializer(ingredient)
             return Response(serialized_ingredient.data,status=HTTP_201_CREATED)
-        # except:
-        #     return Response(status=HTTP_400_BAD_REQUEST)
+        except:
+            return Response(status=HTTP_400_BAD_REQUEST)
         
     def put(self,request,journal_entry_id,plate_id,ingredient_id):
         try:

@@ -16,7 +16,9 @@ class Sign_up(APIView):
             email = request.data.get('email')
             password = request.data.get('password')
             username = email
-            new_user = User.objects.create_user(username=username,password=password,email=email)
+            weight = request.data.get('weight')
+            sex = request.data.get('sex')
+            new_user = User.objects.create_user(username=username,password=password,email=email,weight=weight,sex=sex)
             token = Token.objects.create(user=new_user)
             # change when making front end
             return Response({'user':new_user.email,'token':token.key},status=HTTP_201_CREATED)

@@ -1,8 +1,16 @@
 import Ingredient from "./Ingredient"
 import { backEndApi } from "./utilities"
 import { useState } from "react"
+import { format } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
+
 export default function PlateEntry(props){
     const { journal,plate,setFoodName,foodData, foodName,setJournalList,journalList,setFoodList,foodList,foodAmount,setFoodAmount,unit,setUnit,setPlateList,setClick,click } = props
+    const targetTimeZone = 'America/Chicago';
+    const formattedCreatedAt = format(
+        utcToZonedTime(plate.created_at, targetTimeZone),
+        'yyyy-MM-dd HH:mm:ss'
+      );
     const [data,setData] = useState(null)
     const onClickHandler = (event) =>{
         console.log(data)
@@ -32,7 +40,7 @@ export default function PlateEntry(props){
     return(
     <div className="ingredient">
         <h3>Plate#{plate.id}</h3>
-        <h4>Meal Time {plate.created_at}</h4>
+        <h4>Meal Time {formattedCreatedAt}</h4>
         <form className = 'foodQuery' onSubmit={(event) => {event.preventDefault()}}>
                 <input
                 type="text"

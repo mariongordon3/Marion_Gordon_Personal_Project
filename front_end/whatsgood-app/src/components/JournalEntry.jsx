@@ -1,8 +1,16 @@
 import PlateEntry from "./PlateEntry"
 import { useOutletContext } from "react-router-dom"
 import { backEndApi } from "./utilities"
+import { format } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
+
 export default function JournalEntry(props){
     const { journal,foodData,setFoodName,foodName,foodList,foodAmount,setFoodAmount,setFoodList,journalList,setJournalList,user,unit,setUnit,setPlateList,setClick,click }  = props
+    const targetTimeZone = 'America/Chicago';
+    const formattedCreatedAt = format(
+        utcToZonedTime(journal.created_at, targetTimeZone),
+        'yyyy-MM-dd HH:mm:ss'
+      );
     const plate_maker=()=>{
         let response = backEndApi.post(`journal/${journal.id}/plate/1/`).then((response)=>{ console.log(response)
         setClick(!click)
@@ -22,7 +30,7 @@ export default function JournalEntry(props){
             {journalList?
             <>
                 <div>
-                <h2>Journal Date {journal.created_at} </h2>
+                <h2>Journal Date {formattedCreatedAt}</h2>
             
                 <button onClick={deleteJournal}>delete journal</button>
                     <>

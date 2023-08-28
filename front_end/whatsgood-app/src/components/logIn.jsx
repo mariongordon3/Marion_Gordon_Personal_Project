@@ -9,8 +9,6 @@ export default function LogIn(){
     const [status, setStatus] = useState(0)
     const signUp = async(e) => {
         e.preventDefault()
-        console.log(userName)
-        console.log(password)
         let response = await backEndApi.post("users/login/", {
             "email": userName,
             "password": password,
@@ -24,7 +22,6 @@ export default function LogIn(){
         setUser(responseUser)
         localStorage.setItem("Token",token)
         navigate("/")
-        console.log(response)
     }
     return(
         <div>
