@@ -19,6 +19,6 @@ class MeasurementSerializer(serializers.ModelSerializer):
 class NutrientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nutrient
-        fields = ['name','measurement_id','is_macro']
+        fields = ['name','measurement_id','is_macro','percentDailyValue']
 
 

@@ -16,12 +16,14 @@ class Sign_up(APIView):
             email = request.data.get('email')
             password = request.data.get('password')
             username = email
-            new_user = User.objects.create_user(username=username,password=password,email=email)
+            weight = request.data.get('weight')
+            sex = request.data.get('sex')
+            new_user = User.objects.create_user(username=username,password=password,email=email,weight=weight,sex=sex)
             token = Token.objects.create(user=new_user)
             # change when making front end
             return Response({'user':new_user.email,'token':token.key},status=HTTP_201_CREATED)
         except:
-            return Response({'detail':'invalid credentials or user exists'},status=HTTP_400_BAD_REQUEST)
+            return Response({'detail':'invalid credentials'},status=HTTP_400_BAD_REQUEST)
 
 class Log_in(APIView):
     def post(self,request):
@@ -31,7 +33,7 @@ class Log_in(APIView):
             user = authenticate(username=username,password=password)
             if user:
                 token, created = Token.objects.get_or_create(user = user)
-                return Response({'user':token.user.username,'token':token.key}, status=HTTP_200_OK)
+                return Response({'user':token.user.username,'token':token.key, 'userid':token.user.id}, status=HTTP_200_OK)
             else:
                 return Response({'detail':'invalid credentials'},status=HTTP_400_BAD_REQUEST)
         except: 

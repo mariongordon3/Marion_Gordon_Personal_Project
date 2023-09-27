@@ -3,7 +3,6 @@ import App from "./App.jsx";
 import { Journal } from "./components/Journal.jsx";
 import HomePage from "./components/HomePage.jsx";
 import LogIn from "./components/logIn.jsx";
-import PlateMaker from "./components/PlateMaker.jsx"
 import ErrorPage from "./ErrorPage.jsx";
 import RegisterPage from "./components/Register.jsx";
 const router = createBrowserRouter([
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
         { 
           path: "journal",
           element: <Journal />
-        },
-        {
-          path:"plateMaker",
-          element:<PlateMaker />
         },
         {
             path: "/register",

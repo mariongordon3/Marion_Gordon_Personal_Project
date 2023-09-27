@@ -9,8 +9,6 @@ export default function LogIn(){
     const [status, setStatus] = useState(0)
     const signUp = async(e) => {
         e.preventDefault()
-        console.log(userName)
-        console.log(password)
         let response = await backEndApi.post("users/login/", {
             "email": userName,
             "password": password,
@@ -24,13 +22,12 @@ export default function LogIn(){
         setUser(responseUser)
         localStorage.setItem("Token",token)
         navigate("/")
-        console.log(response)
     }
     return(
         <div>
             <form className="login" onSubmit={(e)=>signUp(e)}>
                 <h5>Login</h5>
-                {status === "invalid credentials"? <><h3>Wrong credentials</h3></>:null}
+                {status? <><h3>{status}</h3></>:null}
                 <input type="email" placeholder="enter email" onChange={(event) => setUserName(event.target.value)} />
                 <input type="password" placeholder='enter password' onChange={(event) => setPassword(event.target.value)} />
                 <input type="submit" />

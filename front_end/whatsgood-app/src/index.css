@@ -1,3 +1,7 @@
+*{
+  font-family: 'Inter', sans-serif;
+}
+
 nav{
   display: flex;
   justify-content: space-around;
@@ -5,11 +9,11 @@ nav{
 }
 
 body{
+min-height: 100vh;
 background: url('https://s3-alpha-sig.figma.com/img/e063/202b/c6712661154a7b67d0482ad874bc030b?Expires=1693785600&Signature=N1NqJF-gUQLBk-ro92fjR9JGIymX4PEsnvJP8oDcqUeaWCflHgoeEEPjiwr1NWxepYb6z2hVoLnvtkUrebGh1VrC69IPHAXvoL1IUvVV1sthIBGQxqEMAinoTjK3gIysMXRwouP418Wu8MdIxluz23Sfee8zMvE8HL-uJON~c8NXEG9ZfRnMVMNKd4xE7JCbF27lQwU23z~EXRnDO3FqaT4vDuZoVs-MjKT~2BABQ2r1Yd9L6QKMdY3bRzucUMMxaRVTjw8hIu4micTZZwvyqdJv6-sqylkNAJI3jueKdMenN8EppZPZ8ByjVu7vSTdz7p1v23mFUPcJDmbxeUSyHA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'), lightgray 50% / cover no-repeat;
 background-blend-mode: screen; background-repeat: no-repeat; background-size: cover;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 margin-top: 0px;
-
 }
 nav > :link{
   color: #000;
@@ -29,13 +33,11 @@ nav > :link{
 margin-top: 20px;
 width: 800px;
 height: fit-content;
-border: solid black 2px;
 }
 
 .ingredient{
 width: 800px;
 height: fit-content;
-border: solid black 2px;
 }
 .selector{
   width: 400px;
@@ -63,6 +65,12 @@ border: solid black 2px;
   color: red;
 }
 
+.register > h5 {
+  font-family: 'Leckerli One', cursive;
+  font-size: 100%;
+  color: white;
+}
+
 .login{
   height:50vh;
   width:75vw;
@@ -84,4 +92,84 @@ border: solid black 2px;
 
 .login > h3{
   color: red;
+}
+
+.login > h5 {
+  font-family: 'Leckerli One', cursive;
+  color: white;
+  font-size: 100%;
+}
+.piechart{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height:40vh;
+  width: 20vw;
+}
+.chartHeaderMacro{
+color: #000;
+font-size: 48px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.chartHeaderMicro{
+  color: #000;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  }
+.dailyIntake{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.home{
+  display:flex;
+  flex-direction: column;
+}
+.homePage-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transform: rotate(320deg);
+}
+
+.homePage-title > h1{
+  font-family: 'Leckerli One', cursive;
+  font-size: 40px;;
+}
+.homePage-macro{
+  display:flex;
+  height:100%;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+
+.homePage-Micro{
+  display:flex;
+  height:100%;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+
+.homePage-numbers{
+  display:flex;
+  height: 90%;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.homePage-img{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+img{
+  height: 100px;
+  width: 100px;
 }

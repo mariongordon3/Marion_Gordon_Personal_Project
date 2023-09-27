@@ -14,6 +14,7 @@ export default function Navbar(props){
             setUser(null)
             navigate("/login")
             delete backEndApi.defaults.headers.common['Authorization']
+            window.location.reload()
         }
     }
     return( 
@@ -22,7 +23,6 @@ export default function Navbar(props){
             <>
                 <Link to="/" >home</Link>
                 <Link to="/journal">journal</Link>
-                <Link to="/plateMaker">plate</Link>
                 <button onClick={logOut}>logout</button>
             </>
             :

@@ -10,6 +10,7 @@ class Nutrient(models.Model):
     name = models.CharField(null=False,blank=False,max_length=255)
     measurement_id = models.ForeignKey(Measurement, on_delete=models.CASCADE, related_name='nutrient_measurements')
     is_macro = models.BooleanField(default=False)
+    percentDailyValue = models.PositiveBigIntegerField(null=True,default=0)
 
 class Plate(models.Model):
     journal_entry_id = models.ForeignKey(Journal_entry,on_delete=models.CASCADE, related_name='plates', null=True)
