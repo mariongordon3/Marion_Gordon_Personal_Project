@@ -1,3 +1,4 @@
+
 *{
   font-family: 'Inter', sans-serif;
 }
@@ -10,7 +11,7 @@ nav{
 
 body{
 min-height: 100vh;
-background: url('https://s3-alpha-sig.figma.com/img/e063/202b/c6712661154a7b67d0482ad874bc030b?Expires=1693785600&Signature=N1NqJF-gUQLBk-ro92fjR9JGIymX4PEsnvJP8oDcqUeaWCflHgoeEEPjiwr1NWxepYb6z2hVoLnvtkUrebGh1VrC69IPHAXvoL1IUvVV1sthIBGQxqEMAinoTjK3gIysMXRwouP418Wu8MdIxluz23Sfee8zMvE8HL-uJON~c8NXEG9ZfRnMVMNKd4xE7JCbF27lQwU23z~EXRnDO3FqaT4vDuZoVs-MjKT~2BABQ2r1Yd9L6QKMdY3bRzucUMMxaRVTjw8hIu4micTZZwvyqdJv6-sqylkNAJI3jueKdMenN8EppZPZ8ByjVu7vSTdz7p1v23mFUPcJDmbxeUSyHA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'), lightgray 50% / cover no-repeat;
+background: url('./images/rice.gif'), lightgray 50% / cover no-repeat;
 background-blend-mode: screen; background-repeat: no-repeat; background-size: cover;
 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 margin-top: 0px;
