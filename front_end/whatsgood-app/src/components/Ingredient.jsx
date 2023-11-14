@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { backEndApi } from "./utilities"
 export default function Ingredient(props){
-    const { ingredient,journal,plate,foodData,setFoodName,foodName,journalList,setFoodList,foodList,onClickHandler,foodAmount,setFoodAmount,unit,setUnit,setClick,click } = props
+    const { ingredient,journal,plate,foodAmount,setFoodAmount,setClick,click } = props
     const delete_ingredient = ()=>{
         let response = backEndApi.delete(`journal/${journal.id}/plate/${plate.id}/ingredient/${ingredient.id}`).then((response)=>{ console.log(response)
         setClick(!click)

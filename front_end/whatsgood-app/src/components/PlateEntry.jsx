@@ -21,14 +21,6 @@ export default function PlateEntry(props){
         })
         
     }
-    const plate_maker=()=>{
-        let response = backEndApi.post(`journal/${journal.id}/plate/${plate.id}/`).then((response)=>{ console.log(response)
-        setClick(!click)
-        }).catch((error)=>{
-            console.log(error)
-        })
-     
-    }
     const delete_plate = ()=>{
         let response = backEndApi.delete(`journal/${journal.id}/plate/${plate.id}/`).then((response)=>{ console.log(response)
         setClick(!click)
@@ -68,7 +60,6 @@ export default function PlateEntry(props){
             </>
             
         </ul>
-        <button onClick={plate_maker}>save plate</button>
         <button onClick={delete_plate}>delete plate</button>
     </div>
     )
