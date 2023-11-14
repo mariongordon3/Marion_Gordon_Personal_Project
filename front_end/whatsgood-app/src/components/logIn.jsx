@@ -6,7 +6,7 @@ export default function LogIn(){
     const {user,setUser} = useOutletContext()
     const [password, setPassword]= useState('')
     const [userName,setUserName] = useState('')
-    const [status, setStatus] = useState(0)
+    const [status, setStatus] = useState('')
     const signUp = async(e) => {
         e.preventDefault()
         let response = await backEndApi.post("users/login/", {
@@ -25,7 +25,7 @@ export default function LogIn(){
     }
     return(
         <div>
-            <form className="login" onSubmit={(e)=>signUp(e)}>
+            <form className="login" name='loginForm' onSubmit={(e)=>signUp(e)}>
                 <h5>Login</h5>
                 {status? <><h3>{status}</h3></>:null}
                 <input type="email" placeholder="enter email" onChange={(event) => setUserName(event.target.value)} />

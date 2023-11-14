@@ -1,5 +1,4 @@
 import { useOutletContext } from "react-router-dom"
-import { useState,useEffect } from "react"
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
@@ -20,7 +19,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 };
 
 export default function HomePage(){
-  const{plateList,journalList,foodAmount,user,setClick,click} = useOutletContext()
+  const{plateList,user} = useOutletContext()
   let carbCount = 0
   let proteinCount = 0
   let fatCount = 0
@@ -28,13 +27,12 @@ export default function HomePage(){
   let proteinGram = 0
   let fatGram = 0
   let calories = 0
-  let microData =[]
+  let microData ={}
   plateList.map((plate)=>{
     plate.ingredients.map((ingredient)=>{
       ingredient.nutrients_id.map((nutrient)=>{
         let microNutrients = []
         let macroNutrients=[]
-        let microNutrientData = {}
         if (nutrient.is_macro===true){
           macroNutrients.push(nutrient)
         }
@@ -126,6 +124,7 @@ export default function HomePage(){
                       {Object.entries(microData).map(([key, value]) => (
                         <li key={key}>{key} : {value}%</li>
                       ))}
+                    <p>**Some micronutrients may not be listed if they are not required to be listed by the manufacturer of the food**</p>
                     </ul>
                   </div>
                 </div>

@@ -32,7 +32,7 @@ export default function RegisterPage(){
     
     return(
         <div>
-            <form className="register" onSubmit={(e)=>signUp(e)}>
+            <form className="register" name='registerForm' onSubmit={(e)=>signUp(e)}>
                 <h5>Signup</h5>
                 {status? <><h3>{status}</h3></>:null}
                 <input type="email" placeholder="enter email" onChange={(event) => setUserName(event.target.value)} />
