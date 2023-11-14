@@ -40,7 +40,7 @@ export default function PlateEntry(props){
     return(
     <div className="ingredient">
         <h4>Meal Time {formattedCreatedAt}</h4>
-        <form className = 'foodQuery' onSubmit={(event) => {event.preventDefault()}}>
+        <form className = 'foodQuery' name='foodForm' onSubmit={(event) => {event.preventDefault()}}>
                 <input
                 type="text"
                 placeholder="enter food"
